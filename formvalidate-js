@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal Registration</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Job Portal Registration</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <span id="nameError" class="error"></span><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <span id="passwordError" class="error"></span><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <span id="emailError" class="error"></span><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required><br>
+        <span id="phoneError" class="error"></span><br>
+
+        <label for="education">Education Qualification:</label>
+        <input type="text" id="education" name="education" required><br>
+        <span id="educationError" class="error"></span><br>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var password = document.getElementById("password").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var education = document.getElementById("education").value;
+
+            var namePattern = /[a-zA-Z ]/;
+            var passwordPattern = /{6,}/;
+            var emailPattern = /[@]/;
+
+            var isValid = true;
+
+            if (!namePattern.test(name)) {
+                document.getElementById("nameError").textContent = "Name should contain alphabets and be at least 6 characters long.";
+                isValid = false;
+            } else {
+                document.getElementById("nameError").textContent = "";
+            }
+
+            if (!passwordPattern.test(password)) {
+                document.getElementById("passwordError").textContent = "Password should be at least 6 characters long.";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").textContent = "";
+            }
+
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Invalid email format.";
+                isValid = false;
+            } else {
+                document.getElementById("emailError").textContent = "";
+            }
+
+            if (phone.length !== 10) {
+                document.getElementById("phoneError").textContent = "Phone number should contain 10 digits only.";
+                isValid = false;
+            } else {
+                document.getElementById("phoneError").textContent = "";
+            }
+
+            if (education.trim() === "") {
+                document.getElementById("educationError").textContent = "Education qualification is required.";
+                isValid = false;
+            } else {
+                document.getElementById("educationError").textContent = "";
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
